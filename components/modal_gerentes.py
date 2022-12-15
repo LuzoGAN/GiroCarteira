@@ -29,7 +29,7 @@ layout = dbc.Modal([
 
 
 # ====== Callbacks ======= #
-# Tabela com os advogados da empresa
+# Tabela com os gerentes da empresa
 @app.callback(
     Output('table_adv', 'children'),
     Input('store_adv', 'data')

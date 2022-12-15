@@ -92,7 +92,7 @@ def gerar_card_processo(df_aux, color_c, color_v, concluido, vencido, concluido_
                             html.Ul([
                                 html.Li([html.B("CLIENTE: ", style={'font-weight': 'bold'}), f"{df_aux['Cliente']}"]),
                                 html.Li([html.B("AGÊNCIA: ", style={'font-weight': 'bold'}), f"{df_aux['Empresa']}"]),
-                                html.Li([html.B("GERENTE: ", style={'font-weight': 'bold'}), f"{df_aux['Advogados']}"])
+                                html.Li([html.B("GERENTE: ", style={'font-weight': 'bold'}), f"{df_aux['Gerentes']}"])
                             ]),
                         ])
                     ], style={'margin-bottom': '32px'}),
@@ -442,7 +442,7 @@ def generate_cards(n, n_all, adv_filter, proc_button, proc_data, adv_data, switc
             cards += [card]
             return cards, None, None, cpf
 
-    # Filtro DROPDOWN de advogados
+    # Filtro DROPDOWN de gerente
     elif (trigg_id == 'advogados_filter'):
         # Dados
         df_aux = df_adv_aux.loc[df_adv_aux['Gerente'] == adv_filter]
@@ -450,7 +450,7 @@ def generate_cards(n, n_all, adv_filter, proc_button, proc_data, adv_data, switc
         oab = df_aux.iloc[0]['Matrícula']
         cpf = df_aux.iloc[0]['CPF']
 
-        # Card do Advogado
+        # Card do Gerente
         card_adv = dbc.Card([
             dbc.CardBody([
                 dbc.Row([

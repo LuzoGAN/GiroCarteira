@@ -22,7 +22,7 @@ data_int = {
         'Data Final': [],
         'Processo Concluído': [],
         'Processo Vencido': [],
-        'Advogados': [],
+        'Gerentes': [],
         'Cliente': [],
         'Cpf Cliente': [],
         'Descrição': [],
@@ -80,7 +80,7 @@ def update_file(adv_data, proc_data):
 
     df_proc_aux.to_sql('processos', conn, if_exists='replace', index=False)
     # conn.commit()
-    df_adv_aux.to_sql('advogados', conn, if_exists='replace', index=False)
+    df_adv_aux.to_sql('gerentes', conn, if_exists='replace', index=False)
     conn.commit()
 
     conn.close()

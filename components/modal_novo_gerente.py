@@ -9,12 +9,12 @@ from app import app
 
 # ========= Layout ========= #
 layout = dbc.Modal([
-    dbc.ModalHeader(dbc.ModalTitle("Adicione Um Advogado")),
+    dbc.ModalHeader(dbc.ModalTitle("Adicione Um Gerente")),
     dbc.ModalBody([
         dbc.Row([
             dbc.Col([
-                dbc.Label("OAB"),
-                dbc.Input(id="adv_oab", placeholder="Apenas números, referente a OAB...", type="number")
+                dbc.Label("Matrícula"),
+                dbc.Input(id="adv_oab", placeholder="Apenas números, Matícula...", type="number")
             ], sm=12, md=6),
             dbc.Col([
                 dbc.Label("CPF"),
@@ -24,7 +24,7 @@ layout = dbc.Modal([
         dbc.Row([
             dbc.Col([
                 dbc.Label("Nome"),
-                dbc.Input(id="adv_nome", placeholder="Nome completo do advogado...", type="text")
+                dbc.Input(id="adv_nome", placeholder="Nome completo do gerente...", type="text")
             ]),
         ]),
         html.H5(id='div_erro2')
@@ -37,7 +37,7 @@ layout = dbc.Modal([
 
 
 # ======= Callbacks ======== #
-# Callback para adicionar novos advogados
+# Callback para adicionar novos gerentes
 @app.callback(
     Output('store_adv', 'data'),
     Output('div_erro2', 'children'),
@@ -58,13 +58,13 @@ def novo_adv(n, dataset, nome, oab, cpf):
 
         df_adv = pd.DataFrame(dataset)
 
-        if oab in df_adv['OAB'].values:
-            return dataset, ["Número de OAB ja existe no sistema!"], {'margin-bottom': '15px', 'color': 'red',
+        if oab in df_adv['Matrícula'].values:
+            return dataset, ["Número de matrícula ja existe no sistema!"], {'margin-bottom': '15px', 'color': 'red',
                                                                       'text-shadow': '2px 2px 8px #000000'}
         elif cpf in df_adv['CPF'].values:
             return dataset, ["Número de CPF ja existe no sistema!"], {'margin-bottom': '15px', 'color': 'red',
                                                                       'text-shadow': '2px 2px 8px #000000'}
-        elif nome in df_adv['Advogado'].values:
+        elif nome in df_adv['Gerente'].values:
             return dataset, [f"Nome {nome} ja existe no sistema!"], {'margin-bottom': '15px', 'color': 'red',
                                                                      'text-shadow': '2px 2px 8px #000000'}
 

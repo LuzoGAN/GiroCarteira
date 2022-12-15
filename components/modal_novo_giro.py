@@ -105,7 +105,7 @@ layout = dbc.Modal([
                         dbc.Label("Selecione o gerente responsável: "),
                         dcc.Dropdown(
                             id='advogados_envolvidos',
-                            options=[{'label': i, 'value': i} for i in df_adv['Advogado']],
+                            options=[{'label': i, 'value': i} for i in df_adv['Gerente']],
                             className='dbc'
                         )
                     ])
@@ -333,11 +333,11 @@ def crud_processos(n_new, n_save, n_delete, store_int, is_open, store_proc, no_p
     return store_proc, [], {}, no_processo, empresa, tipo, acao, vara, fase, instancia, data_inicial, data_final, processo_concluido, processo_vencido, advogados, cliente, cpf_cliente, desc, False
 
 
-# Callback pra atualizar o dropdown de advogados
+# Callback pra atualizar o dropdown de gerentes
 @app.callback(
     Output('advogados_envolvidos', 'options'),
     Input('store_adv', 'data')
 )
 def atu(data):
     df = pd.DataFrame(data)
-    return [{'label': i, 'value': i} for i in df['Advogado']]
+    return [{'label': i, 'value': i} for i in df['Gerente']]

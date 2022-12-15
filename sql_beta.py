@@ -19,17 +19,17 @@ c.execute("""CREATE TABLE IF NOT EXISTS processos (
             'Data Final' text,
             'Processo Concluído' number,
             'Processo Vencido' number,
-            Advogados text,
+            Gerentes text,
             Cliente text,
             'Cpf Cliente' number,
             'Descrição' text)""")
 
-c.execute("""CREATE TABLE IF NOT EXISTS advogados (
+c.execute("""CREATE TABLE IF NOT EXISTS gerentes (
             Gerente text,
             Matrícula number,
             CPF number)""")
 
-df_adv = pd.read_sql("SELECT * FROM advogados", conn)
+df_adv = pd.read_sql("SELECT * FROM gerentes", conn)
 df_proc = pd.read_sql("SELECT * FROM processos", conn)
 
 conn.commit()
