@@ -6,6 +6,6 @@ dash-html-components==2.0.0
 dash-table==5.0.0
 json5==0.9.8
 jsonschema==4.5.1
-pandas==1.4.2
+pandas
 plotly==5.8.0
 gunicorn
