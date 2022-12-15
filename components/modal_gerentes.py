@@ -13,7 +13,7 @@ from components import home
 
 # ======== Layout ========= #
 layout = dbc.Modal([
-            dbc.ModalHeader(dbc.ModalTitle("Cadastro de Advogados")),
+            dbc.ModalHeader(dbc.ModalTitle("Cadastro de Gerentes")),
             dbc.ModalBody([
                 dbc.Row([
                     dbc.Col([
