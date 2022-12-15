@@ -62,12 +62,12 @@ def gerar_card_processo(df_aux, color_c, color_v, concluido, vencido, concluido_
                 dbc.Col([
                     dbc.Row([
                         dbc.Col([
-                            html.H2(f"Processo nº {df_aux['No Processo']}")
+                            html.H2(f"Nº Contato {df_aux['No Processo']}")
                         ])
                     ]),
                     dbc.Row([
                         dbc.Col([
-                            html.P("Processo corre em segredo de justiça por questões similares.",
+                            html.P("Contato não localizado",
                                    style={'text-align': 'left'})
                         ])
                     ]),
@@ -76,10 +76,10 @@ def gerar_card_processo(df_aux, color_c, color_v, concluido, vencido, concluido_
                             html.Ul([
                                 html.Li([html.B("DATA: ", style={'font-weight': 'bold'}),
                                          f"{df_aux['Data Inicial']} - {df_aux['Data Final']}"]),
-                                html.Li([html.B("AÇÃO: ", style={'font-weight': 'bold'}), f"{df_aux['Ação']}"]),
+                                html.Li([html.B("TIPO DE OFERTA: ", style={'font-weight': 'bold'}), f"{df_aux['Ação']}"]),
                                 html.Li(
-                                    [html.B("INSTÂNCIA: ", style={'font-weight': 'bold'}), f"{df_aux['Instância']}"]),
-                                html.Li([html.B("FASE: ", style={'font-weight': 'bold'}), f"{df_aux['Fase']}"]),
+                                    [html.B("CONTATO: ", style={'font-weight': 'bold'}), f"{df_aux['Instância']}"]),
+                                html.Li([html.B("STATUS: ", style={'font-weight': 'bold'}), f"{df_aux['Fase']}"]),
                                 html.Li(
                                     [html.B("DESCRIÇÃO: ", style={'font-weight': 'bold'}), f"{df_aux['Descrição']}"]),
                             ]),
@@ -91,8 +91,8 @@ def gerar_card_processo(df_aux, color_c, color_v, concluido, vencido, concluido_
                         dbc.Col([
                             html.Ul([
                                 html.Li([html.B("CLIENTE: ", style={'font-weight': 'bold'}), f"{df_aux['Cliente']}"]),
-                                html.Li([html.B("EMPRESA: ", style={'font-weight': 'bold'}), f"{df_aux['Empresa']}"]),
-                                html.Li([html.B("ADVOGADO: ", style={'font-weight': 'bold'}), f"{df_aux['Advogados']}"])
+                                html.Li([html.B("AGÊNCIA: ", style={'font-weight': 'bold'}), f"{df_aux['Empresa']}"]),
+                                html.Li([html.B("GERENTE: ", style={'font-weight': 'bold'}), f"{df_aux['Advogados']}"])
                             ]),
                         ])
                     ], style={'margin-bottom': '32px'}),
@@ -121,7 +121,7 @@ def gerar_card_processo(df_aux, color_c, color_v, concluido, vencido, concluido_
                     ], style={'display': 'flex', 'align-items': 'center', 'justify-content': 'center'}),
                     html.Br(),
                     dbc.Row([
-                        dbc.Col([  # TODO REMOVER BOTÃO FAN
+                        dbc.Col([
                             dbc.Button(["Botão fantasma, para solucionar o callback"],
                                        id={'type': 'ghost_processo', 'index': int(df_aux['No Processo'])},
                                        style={'display': 'none'}),
@@ -226,7 +226,7 @@ layout = dbc.Container([
                                 dbc.Col([
                                     dcc.Dropdown(
                                         id='advogados_filter',
-                                        options=[{'label': i, 'value': i} for i in df_adv['Advogado']],
+                                        options=[{'label': i, 'value': i} for i in df_adv['Gerente']],
                                         placeholder='SELECIONE O GERENTE',
                                         className='dbc'
                                     ),
@@ -261,7 +261,7 @@ layout = dbc.Container([
 )
 def atu(data):
     df = pd.DataFrame(data)
-    return [{'label': i, 'value': i} for i in df['Advogado']]
+    return [{'label': i, 'value': i} for i in df['Gerente']]
 
 
 # Callback pra atualizar o dropdown de clientes
@@ -445,9 +445,9 @@ def generate_cards(n, n_all, adv_filter, proc_button, proc_data, adv_data, switc
     # Filtro DROPDOWN de advogados
     elif (trigg_id == 'advogados_filter'):
         # Dados
-        df_aux = df_adv_aux.loc[df_adv_aux['Advogado'] == adv_filter]
-        nome = df_aux.iloc[0]['Advogado']
-        oab = df_aux.iloc[0]['OAB']
+        df_aux = df_adv_aux.loc[df_adv_aux['Gerente'] == adv_filter]
+        nome = df_aux.iloc[0]['Gerente']
+        oab = df_aux.iloc[0]['Matrícula']
         cpf = df_aux.iloc[0]['CPF']
 
         # Card do Advogado
@@ -455,9 +455,9 @@ def generate_cards(n, n_all, adv_filter, proc_button, proc_data, adv_data, switc
             dbc.CardBody([
                 dbc.Row([
                     dbc.Col([
-                        html.H4(f"Advogado: {nome}"),
+                        html.H4(f"GERENTE: {nome}"),
                         html.Hr(),
-                        html.H4(f"OAB: {oab}"),
+                        html.H4(f"MATRÍCULA: {oab}"),
                         html.H4(f"CPF: {cpf}"),
                     ]),
                 ])
@@ -466,7 +466,7 @@ def generate_cards(n, n_all, adv_filter, proc_button, proc_data, adv_data, switc
         cards += [card_adv]
 
         # Processos
-        df_proc_aux = df_proc_aux[df_proc_aux['Advogados'] == nome]
+        df_proc_aux = df_proc_aux[df_proc_aux['Gerente'] == nome]
         df_proc_aux = df_proc_aux.sort_values(by='Data Inicial', ascending=False)
         df_proc_aux.loc[df_proc_aux['Processo Concluído'] == 0, 'Processo Concluído'] = 'Não'
         df_proc_aux.loc[df_proc_aux['Processo Concluído'] == 1, 'Processo Concluído'] = 'Sim'

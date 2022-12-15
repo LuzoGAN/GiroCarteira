@@ -25,8 +25,8 @@ c.execute("""CREATE TABLE IF NOT EXISTS processos (
             'Descrição' text)""")
 
 c.execute("""CREATE TABLE IF NOT EXISTS advogados (
-            Advogado text,
-            OAB number,
+            Gerente text,
+            Matrícula number,
             CPF number)""")
 
 df_adv = pd.read_sql("SELECT * FROM advogados", conn)
