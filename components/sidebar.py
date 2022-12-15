@@ -38,7 +38,7 @@ layout = dbc.Container([
                     dbc.NavLink([html.I(className='fa fa-plus-circle dbc'), "\tCADASTRO"], id='processo_button',
                                 active=True, style={'text-align': 'left'})),
                 html.Br(),
-                dbc.NavItem(dbc.NavLink([html.I(className='fa fa-user-plus dbc'), "\tCONSULTA"], id='lawyers_button',
+                dbc.NavItem(dbc.NavLink([html.I(className='fa fa-user-plus dbc'), "\tGERENTE"], id='lawyers_button',
                                         active=True, style={'text-align': 'left'})),
             ], vertical="lg", pills=True, fill=True)
         ])
