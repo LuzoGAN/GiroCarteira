@@ -12,9 +12,6 @@ import pandas as pd
 from app import app
 from sql_beta import df_proc, df_adv
 
-agencias = pd.read_excel(r'C:\Users\luzo.neto\Desktop\Giro de carteira\Teste\agencias.xlsx')
-agencias = agencias['agencia']
-
 col_centered_style = {'display': 'flex', 'justify-content': 'center'}
 
 # ========= Layout ========= #
@@ -26,7 +23,7 @@ layout = dbc.Modal([
                 # Empresa
                 dbc.Label('Agência', html_for='empresa_matriz'),
                 dcc.Dropdown(id='empresa_matriz', clearable=False, className='dbc',
-                             options=[{'label': ag, 'value': ag} for ag in agencias]),
+                             options=['4- UNIMED GOIÂNIA','5- CALDAS NOVAS','6- MORRINHOS','7- ITUMBIARA','8- ASA SUL','9- TAGUATINGA','10- LUZIÂNIA','11- T-8 GOIÂNIA','12- PALMAS','13- ARAGUAÍNA','14- APARECIDA DE GOIÂNIA','15- REPÚBLICA GOIÂNIA','16- GURUPI','17- T-63 GOIÂNIA','18- CATALÃO','19- VOTUPORANGA','20- JALES','21- FERNANDÓPOLIS','23- AMERICANA','49- BARRETOS','25- SANTA BÁRBARA','27- PIRACICABA IND','28- TIETÊ','29- ITATIBA','30- UNIMED PIRACICABA','31- BOTUCATU','32- AVARÉ','35- ASSIS','36- RIBEIRÃO PRETO','37- CENTRO MÉDICO RIBEIRÃO SHOPPING','38- ASA NORTE','39- ÓRION','40- GAMA','41- ÁGUAS CLARAS','42- CAMPINAS','43- PIRACICABA C BOT','44- UNESP BOTUCATU','45- CASTELO BRANCO','46- ARAPORÃ','47- VALPARAISO','50- UBERLANDIA','51- AP GYN CENTRO','52- SJ RIO PRETO','53- OSASCO','54- IHGG','57- BAURU','59- PLAT.EMPRESAS','60- BRASÍLIA SUDOESTE','61- CIDADE OCIDENTAL','62- INDAIATUBA','65- GUARAÍ','66- ESPAÇO UNI','68- GOIÂNIA ELDORADO','70- PALMAS TAQUARALTO','71- CAMPOS DO JORDÃO','74- BRASILIA 116 NORTE','75- SOBRADINHO']),
                 # Tipo de Processo
                 dbc.Label('Tipo de Contato', html_for='tipo_processo'),
                 dcc.Dropdown(id='tipo_processo', clearable=False, className='dbc',
